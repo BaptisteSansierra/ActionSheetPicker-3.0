@@ -74,6 +74,7 @@ static NSString *const kActionTarget = @"buttonActionTarget";
 @property(nonatomic) NSDictionary *titleTextAttributes; // default is nil. Used to specify Title Label attributes.
 @property(nonatomic) NSAttributedString *attributedTitle; // default is nil. If titleTextAttributes not nil this value ignored.
 @property(nonatomic) NSMutableDictionary *pickerTextAttributes; // default with a NSMutableParagraphStyle to set label align center. Used to specify Picker Label attributes.
+@property(nonatomic) NSMutableDictionary *pickerButtonsAttributes;
 @property(nonatomic) UIColor *pickerBackgroundColor;
 @property(nonatomic) UIColor *toolbarBackgroundColor;
 @property(nonatomic, strong) UIColor *toolbarButtonsColor;

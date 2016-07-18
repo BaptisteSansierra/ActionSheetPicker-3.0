@@ -166,6 +166,7 @@ CG_INLINE BOOL isIPhone4() {
         NSMutableParagraphStyle *labelParagraphStyle = [[NSMutableParagraphStyle alloc] init];
         labelParagraphStyle.alignment = NSTextAlignmentCenter;
         self.pickerTextAttributes = [@{NSParagraphStyleAttributeName : labelParagraphStyle} mutableCopy];
+        self.pickerButtonsAttributes = nil;
 
         self.context = [CIContext contextWithOptions:nil];
         self.filter = [CIFilter filterWithName:@"CIGaussianBlur"];
@@ -477,7 +478,12 @@ CG_INLINE BOOL isIPhone4() {
     pickerToolbar.tintColor = self.toolbarButtonsColor;
 
     NSMutableArray *barItems = [[NSMutableArray alloc] init];
-
+  
+    if( self.pickerButtonsAttributes ) {
+        [self.doneBarButtonItem setTitleTextAttributes:self.pickerButtonsAttributes forState:UIControlStateNormal];
+        [self.cancelBarButtonItem setTitleTextAttributes:self.pickerButtonsAttributes forState:UIControlStateNormal];
+    }
+  
     if (!self.hideCancel) {
         [barItems addObject:self.cancelBarButtonItem];
     }
