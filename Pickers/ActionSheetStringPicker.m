@@ -61,6 +61,8 @@
         self.data = data;
         self.selectedIndex = index;
         self.title = title;
+        self.adjustsFontSizeToFitWidth = NO;
+        self.minimumFontScaleFactor = 0.5;
     }
     return self;
 }
@@ -185,6 +187,10 @@
         attributeTitle = [[NSAttributedString alloc] initWithString:@"" attributes:self.pickerTextAttributes];
     }
     pickerLabel.attributedText = attributeTitle;
+
+    pickerLabel.adjustsFontSizeToFitWidth = self.adjustsFontSizeToFitWidth;
+    pickerLabel.minimumScaleFactor = self.minimumFontScaleFactor;
+  
     return pickerLabel;
 }
 

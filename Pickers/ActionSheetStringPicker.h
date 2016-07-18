@@ -32,6 +32,11 @@ typedef void(^ActionStringDoneBlock)(ActionSheetStringPicker *picker, NSInteger 
 typedef void(^ActionStringCancelBlock)(ActionSheetStringPicker *picker);
 
 @interface ActionSheetStringPicker : AbstractActionSheetPicker <UIPickerViewDelegate, UIPickerViewDataSource>
+
+@property(nonatomic) BOOL adjustsFontSizeToFitWidth;
+@property(nonatomic) CGFloat minimumFontScaleFactor;
+
+
 /**
  *  Create and display an action sheet picker.
  *

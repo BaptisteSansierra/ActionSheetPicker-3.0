@@ -135,6 +135,7 @@ CG_INLINE BOOL isIPhone4() {
         self.presentFromRect = CGRectZero;
         self.popoverBackgroundViewClass = nil;
         self.popoverDisabled = NO;
+        self.adjustsTitleFontSizeToFitWidth = NO;
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnavailableInDeploymentTarget"
@@ -554,7 +555,8 @@ CG_INLINE BOOL isIPhone4() {
 #pragma clang diagnostic pop
         }
     }
-
+    toolBarItemLabel.adjustsFontSizeToFitWidth = self.adjustsTitleFontSizeToFitWidth;
+  
     strikeWidth = textSize.width;
 
     if (strikeWidth < 180) {
