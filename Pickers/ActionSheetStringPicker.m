@@ -190,7 +190,7 @@
 
     pickerLabel.adjustsFontSizeToFitWidth = self.adjustsFontSizeToFitWidth;
     pickerLabel.minimumScaleFactor = self.minimumFontScaleFactor;
-  
+
     return pickerLabel;
 }
 

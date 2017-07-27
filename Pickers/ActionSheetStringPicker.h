@@ -36,7 +36,6 @@ typedef void(^ActionStringCancelBlock)(ActionSheetStringPicker *picker);
 @property(nonatomic) BOOL adjustsFontSizeToFitWidth;
 @property(nonatomic) CGFloat minimumFontScaleFactor;
 
-
 /**
  *  Create and display an action sheet picker.
  *

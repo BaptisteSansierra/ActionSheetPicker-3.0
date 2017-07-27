@@ -108,8 +108,6 @@ CG_INLINE BOOL isIPhone4() {
 
 - (void)presentPopover:(UIPopoverController *)popover;
 
-- (void)dismissPicker;
-
 - (BOOL)isViewPortrait;
 
 - (BOOL)isValidOrigin:(id)origin;
@@ -119,8 +117,6 @@ CG_INLINE BOOL isIPhone4() {
 - (UIToolbar *)createPickerToolbarWithTitle:(NSString *)aTitle;
 
 - (UIBarButtonItem *)createButtonWithType:(UIBarButtonSystemItem)type target:(id)target action:(SEL)buttonAction;
-
-- (IBAction)actionPickerDone:(id)sender;
 
 - (IBAction)actionPickerCancel:(id)sender;
 @end
@@ -264,10 +260,21 @@ CG_INLINE BOOL isIPhone4() {
     self.pickerView = [self configuredPickerView];
     NSAssert(_pickerView != NULL, @"Picker view failed to instantiate, perhaps you have invalid component data.");
     // toolbar hidden remove the toolbar frame and update pickerview frame
+    if( self.headerView ) {
+        self.toolbar.hidden = YES;
+    }
     if (self.toolbar.hidden) {
         int halfWidth = (int) (_borderWidth * 0.5f);
         masterView.frame = CGRectMake(0, 0, self.viewSize.width, 220);
         self.pickerView.frame = CGRectMake(0, halfWidth, self.viewSize.width, 220 - halfWidth);
+    }
+    if( self.headerView ) {
+        CGFloat headerHeight = self.headerView.frame.size.height;
+        self.headerView.frame = CGRectMake(0, 0, self.viewSize.width, headerHeight);
+        int halfWidth = (int) (_borderWidth * 0.5f);
+        masterView.frame = CGRectMake(0, 0, self.viewSize.width, 220 + headerHeight);
+        self.pickerView.frame = CGRectMake(0, halfWidth + headerHeight, self.viewSize.width, 220 - halfWidth);
+        [masterView addSubview:self.headerView];
     }
     [masterView addSubview:_pickerView];
 
@@ -478,12 +485,11 @@ CG_INLINE BOOL isIPhone4() {
     pickerToolbar.tintColor = self.toolbarButtonsColor;
 
     NSMutableArray *barItems = [[NSMutableArray alloc] init];
-  
     if( self.pickerButtonsAttributes ) {
         [self.doneBarButtonItem setTitleTextAttributes:self.pickerButtonsAttributes forState:UIControlStateNormal];
         [self.cancelBarButtonItem setTitleTextAttributes:self.pickerButtonsAttributes forState:UIControlStateNormal];
     }
-  
+
     if (!self.hideCancel) {
         [barItems addObject:self.cancelBarButtonItem];
     }
@@ -562,7 +568,7 @@ CG_INLINE BOOL isIPhone4() {
         }
     }
     toolBarItemLabel.adjustsFontSizeToFitWidth = self.adjustsTitleFontSizeToFitWidth;
-  
+
     strikeWidth = textSize.width;
 
     if (strikeWidth < 180) {
@@ -754,7 +760,7 @@ CG_INLINE BOOL isIPhone4() {
     }
     else if ((self.containerView)) {
         dispatch_async(dispatch_get_main_queue(), ^{
-          [popover presentPopoverFromRect:CGRectMake(_containerView.frame.size.width / 2.f, _containerView.frame.size.height / 2.f, 0, 0) inView:_containerView
+            [popover presentPopoverFromRect:CGRectMake(_containerView.frame.size.width / 2.f, _containerView.frame.size.height / 2.f, 0, 0) inView:_containerView
                    permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 
         });

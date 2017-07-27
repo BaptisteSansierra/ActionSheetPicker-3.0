@@ -74,7 +74,6 @@ static NSString *const kActionTarget = @"buttonActionTarget";
 @property(nonatomic) NSDictionary *titleTextAttributes; // default is nil. Used to specify Title Label attributes.
 @property(nonatomic) NSAttributedString *attributedTitle; // default is nil. If titleTextAttributes not nil this value ignored.
 @property(nonatomic) NSMutableDictionary *pickerTextAttributes; // default with a NSMutableParagraphStyle to set label align center. Used to specify Picker Label attributes.
-@property(nonatomic) NSMutableDictionary *pickerButtonsAttributes;
 @property(nonatomic) UIColor *pickerBackgroundColor;
 @property(nonatomic) UIColor *toolbarBackgroundColor;
 @property(nonatomic, strong) UIColor *toolbarButtonsColor;
@@ -83,7 +82,7 @@ static NSString *const kActionTarget = @"buttonActionTarget";
 @property(nonatomic) UIInterfaceOrientationMask supportedInterfaceOrientations; // You can set your own supportedInterfaceOrientations value to prevent dismissing picker in some special cases.
 @property(nonatomic) TapAction tapDismissAction; // Specify, which action should be fired in case of tapping outside of the picker (on top darkened side). Default is TapActionNone.
 @property(nonatomic) BOOL popoverDisabled; // Disable popover behavior on iPad
-@property(nonatomic) BOOL adjustsTitleFontSizeToFitWidth;
+
 
 - (void)setTextColor:(UIColor *)textColor;
 
@@ -122,5 +121,15 @@ static NSString *const kActionTarget = @"buttonActionTarget";
 
 // Hide picker programmatically
 - (void)hidePickerWithCancelAction;
+
+
+/* PATCH */
+
+@property(nonatomic) NSMutableDictionary *pickerButtonsAttributes;
+@property(nonatomic) BOOL adjustsTitleFontSizeToFitWidth;
+@property(nonatomic) UIView *headerView;
+
+- (void)dismissPicker; // moved from .m to .h
+- (IBAction)actionPickerDone:(id)sender;  // moved from .m to .h
 
 @end
